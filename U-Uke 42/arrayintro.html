@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let navn=["Malin","Tor Kristian", "Sondre", "Amelia"];
+        document.write(navn+"<br>"); //å skrive alt som står i et array
+        document.write(navn[2]+"<br>"); //å skrive et bestemt element
+        navn[3]="Sebastian"; //å bytte en element
+        document.write(navn+"<br>");
+        document.write(navn.length); //å finne hvor mange elementer det er i et array
+        //noe mer meden annen type array
+        const myArray=[10,20,30];
+        //oppgaver bytt 30 med 90, hvordan?
+        //å sjekke type av en array
+        console.log(typeof [10,20]);
+        console.log(Array.isArray([10,20]));
+        //å addere en element til en array
+        myArray.push(100);
+        console.log(myArray);
+        //å fjerne en element first tall i parantese er index og andre tall hvor mange verdier skal
+        myArray.splice(0,2);
+        document.write(myArray);
+        console.log(myArray); 
+    </script>
+</body>
+</html>

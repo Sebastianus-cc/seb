@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol id="handleListe"></ol> <!--Listen som skal fylles med mat-->
+    <script>
+        var handleListe=document.getElementById("handleListe");
+        var matvarer=["Ost", "Brød", "Paprika", "Kaviar"]; //et array med filmer
+        for(var mat of matvarer) { //Traversere arrayet filmer
+            handleListe.innerHTML += "<li>" + mat + "<li>"; //oppretter et listepunt og hender verdi fra
+                }
+    </script>
+</body>
+</html>

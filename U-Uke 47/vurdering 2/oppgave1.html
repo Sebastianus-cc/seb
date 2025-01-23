@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menyboken</title>
+</head>
+<body>
+    <div class="meny">
+        <h1>Vår Meny</h1>
+        <table><tbody id="tblMeny"></tbody></table>
+    </div><br>
+
+    <div class="handlekurv">
+        <h1>Handlekurv</h1>
+        <table><tbody id="tblHandlekurv"></tbody></table>
+    </div>
+    <div id="txtTotalPris"></div>
+    <script src="menyboken.js"></script>
+    <script>
+        var tblMeny = document.getElementById("tblMeny");
+        var tblHandlekurv = document.getElementById("tblHandlekurv");
+        var menyItems = new Map();
+        var bestilteItems = new Map();
+        var txtTotalPris = document.getElementById("txtTotalPris");
+
+        for (var item of menyboken.filmer) {
+            menyItems.set(item.id, item);
+        }
+
+        for (var item of menyItems.values()) {
+            tblMeny.innerHTML += `
+            <tr>
+                <td><img src="${item.poster}" alt="${item.tittel}" style="width:100px;"></td>
+                <td>${item.tittel}</td>
+                <td>kr ${item.pris}</td>
+                <td><button onclick="bestill('${item.id}')">Bestill</button></td>
+            </tr>`;
+        }
+
+        function visHandlekurv() {
+            tblHandlekurv.innerHTML = "";
+            for (var item of bestilteItems.values()) {
+                tblHandlekurv.innerHTML += `
+                <tr>
+                    <td><img src="${item.poster}" alt="${item.tittel}" style="width:50px;"></td>
+                    <td>${item.tittel}</td>
+                    <td>kr ${item.pris}</td>
+                    <td><button onclick="fjern('${item.id}')">Fjern</button></td>
+                </tr>`;
+            }
+            beregnTotalPris();
+        }
+
+        function fjern(itemId) {
+            bestilteItems.delete(itemId);
+            visHandlekurv();
+        }
+
+        function bestill(itemId) {
+            var bestiltItem = menyItems.get(itemId);
+            bestilteItems.set(itemId, bestiltItem);
+            visHandlekurv();
+        }
+
+        function beregnTotalPris() {
+            var totalPris = 0;
+            for (var item of bestilteItems.values()) {
+                totalPris += item.pris;
+            }
+            txtTotalPris.innerHTML = `Total sum: kr ${totalPris}`;
+        }
+    </script>
+</body>
+</html>

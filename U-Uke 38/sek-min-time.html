@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function visTid(antallSekunder){
+            var timer=antallSekunder/3600;//punkt1
+            var heleTimer=Math.floor(timer);//punkt 2
+            var restSekunder=antallSekunder-(heleTimer*3600);//punkt 3
+            var minutter=restSekunder/60;//punkt 4
+            var helMinutter=Math.floor(minutter);//punkt 5
+            var sekunder=restSekunder-(helMinutter*60);//punkt 6
+            document.write(antallSekunder+ " sekunder kan skrives som ");
+            document.write(heleTimer+":"+helMinutter+":"+sekunder+"<br>");
+        }
+        visTid(3009);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const todolist=['make dine', 'wash dishes', 'watch film'];
+        for(let index=0; index<=todolist.length-1; index++){
+            const value=todolist[index];
+            console.log(value);
+        }
+        const nums=[1,1,3];
+        //accumlation
+        let total=0;
+        //acumalative pattren lag variabel loop through array og oppdater resultatt
+        for(let i=0; i<nums.length; i++){
+            const num=nums[i];
+            total+=num;
+        }
+        console.log(total);
+        let numsDouble=[];
+        for(let i=0; i<nums.length; i++){
+            const num=nums[i];
+            numsDouble.push(num*2);
+        }
+        console.log(numsDouble);
+    </script>
+</body>
+</html>

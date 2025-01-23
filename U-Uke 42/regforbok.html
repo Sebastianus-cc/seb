@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="frmBok">
+        <input type="text" id="forfatter" placeholder="Forfatter" required>
+        <input type="text" id="tittel" placeholder="Tittel" required>
+        <button type="submit">Registrer bok</button>
+    </form>
+    <div id="info"></div>
+    <script>
+        var frmBok=document.getElementById("frmBok");
+        var forfatter=document.getElementById("forfatter");
+        var tittel=document.getElementById("tittel");
+        var info=document.getElementById("info");
+        frmBok.onsubmit=function(evt){
+            evt.preventDefault();
+            info.innerHTML = "Forfatter: " + forfatter.value +"<br>";
+            info.innerHTML += "Tittel: " + tittel.value;
+        }
+    </script>
+</body>
+</html>

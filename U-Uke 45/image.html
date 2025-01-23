@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laste opp bilder med Firebase</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js" ></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js" ></script>
+    <style> body{text-align: center;background-color: bisque;} #imagePreview{
+            width: 300px; height: 300px;} </style></head><body>
+    <div id="imageUploader">
+        <input type="file" id="fileInput" accept="image/*">
+        <button id="uploadImage">Last Opp bilde</button></div>
+    <img id="imagePreview" src="" alt="Image Preview">
+    <script type="module">
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import {getStorage,ref,uploadBytes,getDownloadURL } from
+         "https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js";
+        const firebaseConfig = {
+    apiKey: "AIzaSyBDrGWIo8mReBqWVzCzgAShCT4kRi3oDxY",
+    authDomain: "pcitur.firebaseapp.com",
+    projectId: "pcitur",
+    storageBucket: "pcitur.appspot.com",
+    messagingSenderId: "616064225741",
+  appId: "1:616064225741:web:7e35836781070c49bbf484"
+};
+ const app=initializeApp(firebaseConfig);
+ const storage=getStorage(app);
+async function uploadImage(){
+    const fileInput=document.getElementById("fileInput");
+    const file=fileInput.files[0];
+    if(file){
+        const storageRef=ref(storage, `uploaded_images/${file.name}`);
+        await uploadBytes(storageRef,file);
+        const imageURL=await getDownloadURL(storageRef);
+        const imagePreview=document.getElementById("imagePreview");
+        imagePreview.src=imageURL}}
+ const uploadButton=document.getElementById("uploadImage");
+ uploadButton.addEventListener('click',uploadImage);
+    </script>
+</body>
+</html>

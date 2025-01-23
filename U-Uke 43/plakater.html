@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Vis neste plakat</button>
+    <img id="imgPlakat">
+    <script>
+        var btn=document.getElementById("btn");
+        var imgPlakat=document.getElementById("imgPlakat");
+        var plakater=["alien.jpg", "friday 13th.jpg", "halloween.jpg", "terrifier 2.jpg"];
+        var i=0;
+        imgPlakat.src=plakater[0];
+        btn.onclick=function(){
+            i++;
+            if(i===plakater.length){
+                i=0
+            }
+            imgPlakat.src=plakater[i];
+        }
+    </script>
+</body>
+</html>

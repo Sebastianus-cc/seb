@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div>Antall elever med karakter 5 eller 6 er <b id="txtAntall"></b></div>
+    <script>
+        var txtAntall = document.getElementById("txtAntall");
+        var karakterer = [3, 4, 2, 6, 4, 3, 5, 6, 6, 2, 2, 6, 3, 4, 2, 5, 6, 3, 4]; 
+        var antallToppkarakterer = 0; //Starter opptellingen på 0
+        for(var karakter of karakterer) {
+            if (karakter >= 5) {
+                antallToppkarakterer++; //Øker antallToppkarakterer med 1
+            }
+        }
+        txtAntall.innerHTML = antallToppkarakterer; //Viser resultatet i <b></b> i div-elementet
+    </script>
+    
+</body>
+</html>

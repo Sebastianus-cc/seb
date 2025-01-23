@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="firkant" style="background: darkorchid"></div>
+    <script>
+        var firkant=document.getElementById("firkant");
+        var bredde=0;
+        var hoyde=0;
+        function bliStor(){
+            firkant.style.width=bredde+"px";
+            firkant.style.height=hoyde+"px";
+            bredde=bredde+1;
+            hoyde=hoyde+1;
+            if(bredde<=800){
+                requestAnimationFrame(bliStor);
+            }
+        }
+        bliStor();
+    </script>
+</body>
+</html>

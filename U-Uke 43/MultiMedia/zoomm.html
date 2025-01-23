@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #bilderamme {
+            width: 475px;
+            height: 345px;
+            border: 10px solid dimgray;
+            overflow: hidden;
+            margin: 50px auto;
+
+        }
+        #imgPing {
+            cursor: zoom-in;
+            width: 475px;
+            transition: all;
+        }
+    </style>
+    <div id="bilderamme">
+        <img id="imgPing" src="rip-rain.gif">
+    </div>
+</head>
+<body>
+    <script>
+        var imgPing=document.getElementById("imgPing");
+        var bilderamme=document.getElementById("bilderamme");
+        imgPing.onmouseover=function(){
+            imgPing.style.width="1900px";
+        };
+        imgPing.onmouseout=function(){
+            imgPing.style.width="175px";
+        };
+    </script>
+</body>
+</html>

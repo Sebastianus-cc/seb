@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="frmRegistrerTing">
+        <input id="inpTing" type="text" placeholder="Ting jeg må huske" required>
+        <button type="submit">OK</button>
+    </form>
+    <ul id="huskeliste"></ul>
+    <script>
+        var frmRegistrerTing=document.getElementById("frmRegistrerTing");
+        var ingTing=document.getElementById("inpTing");
+        var huskeliste=document.getElementById("huskeliste");
+        frmRegistrerTing.onsubmit=function(evt){
+            evt.preventDefault(); //Denne må du ikke glemme
+            huskeliste.innerHTML += "<li>" + inpTing.value + "</li>"
+            ingTing.value = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bordbestilling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #bestillingsInfo {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bordbestilling</h1>
+    <form id="bestillingsSkjema">
+        <label for="navn">Navn:</label>
+        <input type="text" id="navn" name="navn" required>
+
+        <label for="antallPersoner">Antall personer:</label>
+        <select id="antallPersoner" name="antallPersoner" required>
+            <option value="">Velg antall</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+
+        <label for="dato">Dato:</label>
+        <input type="date" id="dato" name="dato" required>
+
+        <label for="klokkeslett">Klokkeslett:</label>
+        <input type="time" id="klokkeslett" name="klokkeslett" required>
+
+        <label for="epost">E-post:</label>
+        <input type="email" id="epost" name="epost" required>
+
+        <button type="submit">Bestill bord</button>
+    </form>
+
+    <div id="bestillingsInfo"></div>
+
+    <script>
+        document.getElementById('bestillingsSkjema').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const navn = document.getElementById('navn').value;
+            const antallPersoner = document.getElementById('antallPersoner').value;
+            const dato = document.getElementById('dato').value;
+            const klokkeslett = document.getElementById('klokkeslett').value;
+            const epost = document.getElementById('epost').value;
+
+            if (validateForm(navn, antallPersoner, dato, klokkeslett, epost)) {
+                visbestillingsInfo(navn, antallPersoner, dato, klokkeslett, epost);
+            }
+        });
+
+        function validateForm(navn, antallPersoner, dato, klokkeslett, epost) {
+            if (navn.length < 2) {
+                alert('Vennligst skriv inn et gyldig navn');
+                return false;
+            }
+            if (antallPersoner === "") {
+                alert('Vennligst velg antall personer');
+                return false;
+            }
+            if (new Date(dato) < new Date()) {
+                alert('Vennligst velg en fremtidig dato');
+                return false;
+            }
+            if (klokkeslett < "11:00" || klokkeslett > "22:00") {
+                alert('Vennligst velg et klokkeslett mellom 11:00 og 22:00');
+                return false;
+            }
+            if (!epost.includes('@')) {
+                alert('Vennligst skriv inn en gyldig e-postadresse');
+                return false;
+            }
+            return true;
+        }
+
+        function visbestillingsInfo(navn, antallPersoner, dato, klokkeslett, epost) {
+            const bestillingsInfo = document.getElementById('bestillingsInfo');
+            bestillingsInfo.innerHTML = `
+                <h2>Din bestilling:</h2>
+                <p><strong>Navn:</strong> ${navn}</p>
+                <p><strong>Antall personer:</strong> ${antallPersoner}</p>
+                <p><strong>Dato:</strong> ${dato}</p>
+                <p><strong>Klokkeslett:</strong> ${klokkeslett}</p>
+                <p><strong>E-post:</strong> ${epost}</p>
+            `;
+            bestillingsInfo.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

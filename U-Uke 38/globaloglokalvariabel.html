@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var poengsum=0;
+        function leggTilPoeng(){
+            poengsum=poengsum+1;
+        }
+        function trekkFraPoeng(){
+            poengsum=poengsum-1;
+        }
+        leggTilPoeng();
+        leggTilPoeng();
+        trekkFraPoeng();
+        document.write("Antall poeng"+poengsum);
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="togi.gif" id="togi">
+    <script>
+        var snowball=document.getElementById("togi");
+        togi.animate([
+            {transform: "rotate(0deg)",marginLeft:"10px"},
+            {transform:"rotate(1440deg)",marginLeft:"500px"},
+        ],{
+            duration:3000,
+            direction:"alternate",
+            iterations:Infinity,
+            easing:"ease-in-out"
+        });
+    </script>
+</body>
+</html>

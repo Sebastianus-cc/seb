@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span><input type="number" id="tall01">+</span>
+    <span><input type="number" id="tall02">+</span>
+    <span id="txtSum"></span>"
+    <script>
+        var tall01=document.getElementById("tall01");
+        var tall02=document.getElementById("tall02");
+        var txtSum=document.getElementById("txtSum");
+
+        function leggSammenTall(){
+            var t1=Number(tall01.value);
+            var t2=Number(tall02.value);
+            var sum=t1+t2;
+            txtSum.innerHTML=sum;
+        }
+       
+        tall01.oninput=leggSammenTall;
+        tall02.oninput=leggSammenTall;
+    </script>
+</body>
+</html>

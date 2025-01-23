@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px; 
+}
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    label, input {
+        margin-bottom: 10px;
+    }
+    
+    input[type="submit"] { 
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <h1>Registrer deg hos butikken.no</h1>
+    <form id="registrationForm">    
+        <label for="fornavn">Fornavn:</label>
+        <input type="text" id="fornavn" name="fornavn" required>
+
+        <label for="etternavn">Etternavn:</label>
+        <input type="text" id="etternavn" name="etternavn" required>
+
+        <label for="postnummer">Postnummer:</label>
+        <input type="text" id="postnummer" name="postnummer" required>
+
+        <label for="epost">E-postadresse:</label>
+        <input type="email" id="epost" name="epost" required>
+
+        <label for="passord">Passord;</label>
+        <input type="passord" id="passord" name="passord" required>
+
+        <label for="bekreftPassord">Bekreft passord:</label>
+        <input type="passord" id="bekreftPassord" name="bekreftPassord" required>
+
+        <input type="submit" value="Registrer">
+    </form>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('registrationForm').onsubmit= function(e) {
+            e.preventDefault();
+            var passord= document.getElementById('passord').value;
+            var bekreftPassord= document.getElementById('bekreftPassord').value;
+            var message= document.getElementById('message');
+
+            if (passord !== bekreftPassord) {
+                message.textContent= 'Passordene samsvarer ikke!';
+                message.style.color= 'red';
+            } else {
+                message.textContent= 'Registrering vellykket!';
+                message.style.color= 'green';
+                this.reset();
+            }
+        };
+    </script>
+</body>
+</html>

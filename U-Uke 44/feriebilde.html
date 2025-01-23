@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            text-align: center;
+            margin: 20px;
+        }
+
+        #imgBilde {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin: 10px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="bildeTittel"></h2>
+        <img id="imgBilde">
+        <br>
+        <button id="btnForrige">Vis forrige bilde</button>
+        <button id="btnNeste">Vis neste bilde</button>
+    </div>
+    <script>
+        var btnNeste = document.getElementById("btnNeste");
+        var btnForrige = document.getElementById("btnForrige");
+        var imgBilde = document.getElementById("imgBilde");
+        var bildeTittel = document.getElementById("bildeTittel");
+
+        var bilder = ["field.jpg", "fuji.jpg", "japanese temple.jpg", "shrine.jpg"]
+        var ferieBilder = ["Ferie i Japan field", "Ferie til Fuji", "Ferie til Japansk tempel", "Ferie til Japansk shrine"]
+        var i = 0;
+        oppdaterBilde();
+        btnNeste.onclick = function() {
+            i++;
+            if(i >= bilder.length) {
+                i=0;
+            }
+            oppdaterBilde();
+        }
+        btnForrige.onclick = function() {
+            i--;
+            if(i < 0) {
+                i = bilder.length - 1;
+            }
+            oppdaterBilde();
+        }
+        function oppdaterBilde() {
+            imgBilde.src = bilder[i];
+            imgBilde.alt = ferieBilder[i];
+            bildeTittel.textContent = ferieBilder[i];
+        }
+    </script>
+</body>
+</html>

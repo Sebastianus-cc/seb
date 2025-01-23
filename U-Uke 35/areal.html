@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let radius=Number(prompt("Skriv inn radien til en sirkel i meter"));
+        let areal=Math.PI*Math.pow(radius,2);
+        var omkrets=2*Math.PI*radius;
+
+        areal=Math.round(areal);
+        omkrets=Math.round(omkrets);
+        document.write("Dersom radien i en sirkel er "+radius+" meter, er arealet "+areal+" kvadratmeter og omkretsen "+omkrets+" meter");
+    </script>
+</body>
+</html>

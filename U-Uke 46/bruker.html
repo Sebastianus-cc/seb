@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication er Gøy</title>
+  <style>
+    body{text-align: center;background-color: aquamarine;color: black;}
+  </style>
+</head>
+<body>
+  <div id="autSkjema">
+<h1>Registrer deg eller Logg in</h1>
+<input type="email" placeholder="email" id="userEmail">
+<input type="password" placeholder="password" id="userPassword"><br>
+<button id="signUpButton">Registrer deg</button>
+<button id="signInButton">Logg In</button>
+  </div>
+  <div id="secretContent">
+    <h4>Dette er hemmlig innhold, du kan bare  ser når du er medlem</h4>
+    <h1>Bekreftet</h1>
+<button id="signUtButton">Logg Av</button>
+  </div>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+ 
+    } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+ 
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+ 
+    // Your web app's Firebase configuration
+   
+  // Import the functions you need from the SDKs you need
+ // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+ 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBd2rENsk-ScQiiUvKG6MnY3ZIv20rCOao",
+    authDomain: "lkpkjohgfcxh.firebaseapp.com",
+    projectId: "lkpkjohgfcxh",
+    storageBucket: "lkpkjohgfcxh.firebasestorage.app",
+    messagingSenderId: "743608979030",
+    appId: "1:743608979030:web:3c3820978e4374e0b875f7"
+  };
+ 
+  // Initialize Firebase
+  //const app = initializeApp(firebaseConfig);
+ 
+ 
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth=getAuth(app);
+//å finne info fra bruker
+const userEmail=document.querySelector("#userEmail");
+const userPassword=document.querySelector("#userPassword");
+const authForm=document.querySelector("#autSkjema");
+const secretContent=document.querySelector("#secretContent");
+//Knapper
+const signUpButton=document.querySelector("#signUpButton");
+const signInButton=document.querySelector("#signInButton");
+const signUtButton=document.querySelector("#signUtButton");
+ 
+secretContent.style.display='none';
+ 
+const userSignUp=async()=>{
+  const signUpEmail=userEmail.value;
+  const signUpPassword=userPassword.value;
+  createUserWithEmailAndPassword(auth,signUpEmail,signUpPassword)
+  .then((userCredential)=>{
+    const user=userCredential.user;
+    console.log(user);
+    alert("Din konoto ble opprettet");
+ 
+  })
+  .catch((error)=>{
+    const errorCode=error.code;
+    const errorMessage=error.message;
+    console.log(errorCode+errorMessage)
+ 
+  })
+ 
+}
+ 
+ 
+const userSignIn=async()=>{
+  const signInEmail=userEmail.value;
+  const signInPassword=userPassword.value;
+  signInWithEmailAndPassword(auth,signInEmail,signInPassword)
+  .then((userCredential)=>{
+    const user=userCredential.user;
+   
+    alert("Du har logget inn!!!");
+ 
+  })
+  .catch((error)=>{
+ 
+    const errorCode=error.code;
+    const errorMessage=error.message;
+    console.log(errorCode+errorMessage)
+ 
+  })
+ 
+}
+const checkAuthState=async()=>{
+  onAuthStateChanged(auth,user=>{
+    if(user){
+      authForm.style.dispaly='none';
+      secretContent.style.display='block';
+ 
+    }else{
+     
+      authForm.style.display='block';
+      secretContent.style.dispaly='none';
+    }
+  })
+}
+const userSignUt=async()=>{
+  await signOut(auth);
+}
+checkAuthState();
+signUpButton.addEventListener('click',userSignUp);
+signInButton.addEventListener('click',userSignIn);
+signUtButton.addEventListener('click',userSignUt);
+ 
+ 
+  </script>
+</body>
+</html>

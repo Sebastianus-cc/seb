@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="oppgave1.css">
+</head>
+<body>
+    <div class="calulator">
+        <h1>Kalkulator</h1>
+        <input type="number" id="num1" placeholder="Første tall">
+        <input type="number" id="num2" placeholder="Andre tall">
+
+        <div class="operation">
+            <input type="radio" id="sum" name="operation" value="sum" checked>
+            <label for="sum">Sum</label>
+            <input type="radio" id="diff" name="operation" value="diff">
+            <label for="diff">Differanse</label>
+        </div>
+        
+        <button onclick="calculate()">Beregn</button>
+
+        <div id="result"></div>
+    </div>
+    <script src="oppgave1.js"></script>
+</body>
+</html>

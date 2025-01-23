@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spill</title>
+    <style>
+        #spill {
+            position: relative;
+            background-image: url(casino.gif);
+            background-repeat: repeat-x;
+            width: 288px;
+            height: 384px;
+            overflow: hidden; /* Hindrer innhold fra å gå utenfor spillområdet */
+        }
+        #fugl {
+            position: absolute;
+            background-image: url(togi.gif);
+            background-repeat: no-repeat;
+            background-size: cover; /* Sørger for at bildet fyller fuglen */
+            width: 34px;
+            height: 24px; /* Rettet med px */
+            left: 30px;
+            top: 100px; /* Startposisjon for fuglen */
+        }
+    </style>
+</head>
+<body>
+    <div id="spill">
+        <div id="fugl"></div>
+    </div>
+    
+    <script>
+        // HTML-elementer
+        var spill = document.getElementById("spill");
+        var fugl = document.getElementById("fugl");
+
+        // Spillvariabler
+        var krasjhoyde = 360;
+        var fuglpos = 100; // Startposisjon for fuglen
+        var fuglenFlyr = true;
+        var gravitasjon = 0.1;
+        var fallfart = 1;
+        var bgpos = 0;
+        var bgfart = -1;
+
+        // Fuglen beveger seg
+        function fly() {
+            fallfart += gravitasjon;
+            fuglpos += fallfart;
+            if (fuglpos > krasjhoyde) {
+                fuglpos = krasjhoyde;
+                fuglenFlyr = false; // Spill stopper når fuglen treffer bakken
+            }
+            fugl.style.top = fuglpos + "px";
+        }
+
+        // Bevegelse av bakgrunnen
+        function bevegBackgrunn() {
+            bgpos += bgfart;
+            spill.style.backgroundPosition = bgpos + "px 0px";
+        }
+
+        // Spillets hovedloop
+        function gameLoop() {
+            bevegBackgrunn();
+            fly();
+            if (fuglenFlyr) {
+                requestAnimationFrame(gameLoop);
+            } else {
+                console.log("Spillet er over!");
+            }
+        }
+
+        // Start spillet
+        gameLoop();
+
+        // Fuglen hopper når du klikker
+        function flaks() {
+            if (fuglenFlyr) {
+                fallfart = -4; // Fuglen hopper opp
+            }
+        }
+        spill.onclick = flaks;
+    </script>
+</body>
+</html>

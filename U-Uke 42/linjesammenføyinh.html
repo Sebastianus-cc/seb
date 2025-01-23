@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dere vil lære Universal utforming av deres nettside for svaksynet bruker</h1>
+    <h2>Dere er velkommen på Universal utformet side</h2>
+    <p>Bare berør tekst på skjermen til å høre hva er innholdet i teksten</p>
+
+    <script>
+        let msg=new SpeechSynthesisUtterance();
+        let voices=speechSynthesis.getVoices();
+        msg.voice=voices[0];
+
+        let tags=document.querySelectorAll('h1,h2,p');
+        tags.forEach((tag) => {
+            tag.addEventListener('click',(e)=>{
+                msg.text= e.target.innerText;
+                tag.style.backgroundColor="SkyBlue";
+                speechSynthesis.speak(msg);
+
+                let interval=setInterval(()=>{
+                    if(!speechSynthesis.speaking){
+                        tag.style.removeProperty('background-color');
+                        clearInterval(interval);
+                    }
+                },100);
+            })
+        });
+
+        msg.text="Hello Benjamin, Nerius, Muhammed, Ingeborg, Tumas, Henrik, Aydan";
+        window.speechSynthesis.speak(msg);
+    </script>
+</body>
+</html>

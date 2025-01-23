@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inpNavn">
+    <span id="txtNavn"></span>
+    <script>
+        var inpNavn=document.getElementById("inpNavn");
+        var txtNavn=document.getElementById("txtNavn");
+        //hendelsstyrtfunction
+        inpNavn.oninput=function(){
+            txtNavn.innerHTML=inpNavn.value;
+
+        }
+        inpNavn.onfocus=function(){
+            
+        }
+    </script>
+</body>
+</html>

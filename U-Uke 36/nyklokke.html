@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let klokke=Math.floor(Math.random()*24);
+        let klokker;
+        if(klokke<10){
+            klokker="God morgen!";
+        }else
+        {
+            klokker="God dag!";
+        }
+        document.write(`<h1>Nå klokka ${klokke},og jeg fortelle deg ${klokker}</h1>`)
+    </script>
+</body>
+</html>

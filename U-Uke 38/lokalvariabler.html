@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var totalPrisMedMoms=0;//global variabel
+        function lagOrderlinje(prisUtenMoms){
+            var moms=prisUtenMoms*0.25;//lokal variabel
+            var prisMedMoms=prisUtenMoms+moms;//lokal variabel
+            totalPrisMedMoms+=prisMedMoms;//øker den globale variabelen
+            document.write("Pris for varer er "+prisMedMoms+" Herav moms kr"+moms+". Totalpris til nå er "+totalPrisMedMoms+".<br>");
+
+        }
+        lagOrderlinje(200);
+        lagOrderlinje(350);
+        lagOrderlinje(420);
+
+    </script>
+
+
+</body>
+</html>

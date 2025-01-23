@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article id="kontaktliste">
+    <h1>Kontakt Liste</h1></article>
+    <script>
+        var kontaktliste=document.getElementById("kontaktliste");
+        function lagKontaktliste(fornavn,etternavn,nummer){
+            kontaktliste.innerHTML+="<h2>Kontakt Liste</h2>";
+            kontaktliste.innerHTML+="<p>Fornavn"+fornavn+"</p>";
+            kontaktliste.innerHTML+="<p>Etternavn"+etternavn+"</p>";
+            kontaktliste.innerHTML+="<p>Telefon nummer "+nummer+"</p>";
+        }
+        lagKontaktliste(" Sebastian Ionut"," Nita", 41252534);
+        lagKontaktliste(" Tor Kristian", " Kandal", 86246227);
+        lagKontaktliste(" Kyle", " Owawa", 64837912 );
+
+    </script>
+</body>
+</html>

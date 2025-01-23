@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skole Database System</title>
+    <style>
+        label { display: inline-block; width: 150px; }
+        input, select { width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Skole Database System</h1>
+
+    <label for="userType">Brukertype:</label>
+    <select id="userType">
+        <option value="elev">Elev</option>
+        <option value="lærer">Lærer</option>
+        <option value="miljøfagarbeider">Miljøfagarbeider</option>
+        <option value="admin">Admin</option>
+        <option value="it-medarbeider">IT-medarbeider</option>
+    </select><br><br>
+
+    <label for="brukernavn">Brukernavn:</label> 
+    <input id="brukernavn" type="text"><br><br>
+
+    <label for="navn">Navn:</label> 
+    <input id="navn" type="text"><br><br>
+
+    <label for="adresse">Adresse:</label> 
+    <input id="adresse" type="text"><br><br>
+
+    <label for="telefon">Telefonnummer:</label> 
+    <input id="telefon" type="tel"><br><br>
+
+    <label for="datamaskinId">Datamaskin ID:</label> 
+    <input id="datamaskinId" type="text"><br><br>
+
+    <label for="datamaskinModell">Datamaskin Modell:</label> 
+    <input id="datamaskinModell" type="text"><br><br>
+
+    <label for="datamaskinAlder">Datamaskin Alder:</label> 
+    <input id="datamaskinAlder" type="number"><br><br>
+
+    <hr>
+    
+    <button id="innsettBtn">Sett inn</button>
+    <button id="hentBtn">Hent</button>
+    <button id="oppdaterBtn">Oppdater</button>
+    <button id="slettBtn">Slett</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getDatabase, ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+        // Din Firebase-konfigurasjon
+        const firebaseConfig = {
+    apiKey: "AIzaSyCLF1-e2cMLHavYEnzNp8PfTqzzu0X0M80",
+    authDomain: "crudbang.firebaseapp.com",
+    databaseURL: "https://crudbang-default-rtdb.firebaseio.com",
+    projectId: "crudbang",
+    storageBucket: "crudbang.firebasestorage.app",
+    messagingSenderId: "21093960348",
+    appId: "1:21093960348:web:67ba5f415853ef856afb59"
+  };
+
+        // Initialiser Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+
+        // Velg elementer fra DOM
+        var userType = document.getElementById("userType");
+        var brukernavn = document.getElementById("brukernavn");
+        var navn = document.getElementById("navn");
+        var adresse = document.getElementById("adresse");
+        var telefon = document.getElementById("telefon");
+        var datamaskinId = document.getElementById("datamaskinId");
+        var datamaskinModell = document.getElementById("datamaskinModell");
+        var datamaskinAlder = document.getElementById("datamaskinAlder");
+
+        var innsettBtn = document.getElementById("innsettBtn");
+        var hentBtn = document.getElementById("hentBtn");
+        var oppdaterBtn = document.getElementById("oppdaterBtn");
+        var slettBtn = document.getElementById("slettBtn");
+
+        // Sett inn data
+        function InsertData() {
+            set(ref(db, `Users/${userType.value}/${brukernavn.value}`), {
+                navn: navn.value,
+                adresse: adresse.value,
+                telefonnummer: telefon.value,
+                datamaskin: {
+                    id: datamaskinId.value,
+                    modell: datamaskinModell.value,
+                    alder: datamaskinAlder.value
+                }
+            })
+            .then(() => {
+                alert("Data ble lagret");
+            })
+            .catch((error) => {
+                alert("Data ble ikke lagret: " + error);
+            });
+        }
+
+        // Hent data
+        function SelectData() {
+            const dbref = ref(db);
+            get(child(dbref, `Users/${userType.value}/${brukernavn.value}`))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    navn.value = data.navn || '';
+                    adresse.value = data.adresse || '';
+                    telefon.value = data.telefonnummer || '';
+                    if (data.datamaskin) {
+                        datamaskinId.value = data.datamaskin.id || '';
+                        datamaskinModell.value = data.datamaskin.modell || '';
+                        datamaskinAlder.value = data.datamaskin.alder || '';
+                    } else {
+                        datamaskinId.value = '';
+                        datamaskinModell.value = '';
+                        datamaskinAlder.value = '';
+                    }
+                } else {
+                    alert("Ingen data finnes");
+                }
+            })
+            .catch((error) => {
+                alert("Feil ved henting av data: " + error);
+            });
+        }
+
+        // Oppdater data
+        function UpdateData() {
+            update(ref(db, `Users/${userType.value}/${brukernavn.value}`), {
+                navn: navn.value,
+                adresse: adresse.value,
+                telefonnummer: telefon.value,
+                datamaskin: {
+                    id: datamaskinId.value,
+                    modell: datamaskinModell.value,
+                    alder: datamaskinAlder.value
+                }
+            })
+            .then(() => {
+                alert("Data ble oppdatert");
+            })
+            .catch((error) => {
+                alert("Data ble ikke oppdatert: " + error);
+            });
+        }
+
+        // Slett data
+        function DeleteData() {
+            remove(ref(db, `Users/${userType.value}/${brukernavn.value}`))
+            .then(() => {
+                alert("Data fjernet");
+            })
+            .catch((error) => {
+                alert("Sletting mislyktes: " + error);
+            });
+        }
+
+        // Knytt hendelser til knapper
+        innsettBtn.addEventListener('click', InsertData);
+        hentBtn.addEventListener('click', SelectData);
+        oppdaterBtn.addEventListener('click', UpdateData);
+        slettBtn.addEventListener('click', DeleteData);
+    </script>
+</body>
+</html>

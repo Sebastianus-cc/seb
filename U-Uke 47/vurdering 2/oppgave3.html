@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autentisering og Applikasjoner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #e0ffff;
+      color: #333;
+    }
+    #secretContent {
+      display: none;
+    }
+    .app {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    input, button {
+      margin: 10px;
+      padding: 8px;
+    }
+    #kalkulator input {
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="autSkjema">
+    <h1>Registrer deg eller Logg inn</h1>
+    <input type="email" placeholder="E-post" id="userEmail">
+    <input type="password" placeholder="Passord" id="userPassword"><br>
+    <button id="signUpButton">Registrer deg</button>
+    <button id="signInButton">Logg inn</button>
+  </div>
+  
+  <div id="secretContent">
+    <h1>Velkommen til dine applikasjoner</h1>
+    <button id="signUtButton">Logg ut</button>
+    
+    <div id="kalkulator" class="app">
+      <h2>Enkel Kalkulator</h2>
+      <input type="number" id="num1"> 
+      <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" id="num2">
+      <button onclick="calculate()">Beregn</button>
+      <p id="result"></p>
+    </div>
+
+    <div id="todoList" class="app">
+      <h2>Todo-liste</h2>
+      <input type="text" id="todoInput" placeholder="Legg til oppgave">
+      <button onclick="addTodo()">Legg til</button>
+      <ul id="todos"></ul>
+    </div>
+
+    <div id="valutaKonverterer" class="app">
+      <h2>Valutakonverterer</h2>
+      <input type="number" id="amount" placeholder="Beløp">
+      <select id="fromCurrency">
+        <option value="NOK">NOK</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+      <select id="toCurrency">
+        <option value="USD">USD</option>
+        <option value="NOK">NOK</option>
+        <option value="EUR">EUR</option>
+      </select>
+      <button onclick="convertCurrency()">Konverter</button>
+      <p id="conversionResult"></p>
+    </div>
+
+    <div id="veerApp" class="app">
+      <h2>Værapp</h2>
+      <input type="text" id="cityInput" placeholder="Skriv inn by">
+      <button onclick="getWeather()">Sjekk vær</button>
+      <p id="weatherResult"></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBd2rENsk-ScQiiUvKG6MnY3ZIv20rCOao",
+      authDomain: "lkpkjohgfcxh.firebaseapp.com",
+      projectId: "lkpkjohgfcxh",
+      storageBucket: "lkpkjohgfcxh.firebasestorage.app",
+      messagingSenderId: "743608979030",
+      appId: "1:743608979030:web:3c3820978e4374e0b875f7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const userEmail = document.querySelector("#userEmail");
+    const userPassword = document.querySelector("#userPassword");
+    const authForm = document.querySelector("#autSkjema");
+    const secretContent = document.querySelector("#secretContent");
+    const signUpButton = document.querySelector("#signUpButton");
+    const signInButton = document.querySelector("#signInButton");
+    const signUtButton = document.querySelector("#signUtButton");
+
+    const userSignUp = async () => {
+      const signUpEmail = userEmail.value;
+      const signUpPassword = userPassword.value;
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
+        console.log(userCredential.user);
+        alert("Din konto ble opprettet");
+      } catch (error) {
+        console.log(error.code + error.message);
+        alert("Feil ved registrering: " + error.message);
+      }
+    };
+
+    const userSignIn = async () => {
+      const signInEmail = userEmail.value;
+      const signInPassword = userPassword.value;
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, signInEmail, signInPassword);
+        console.log(userCredential.user);
+        alert("Du har logget inn!");
+      } catch (error) {
+        console.log(error.code + error.message);
+        alert("Feil ved innlogging: " + error.message);
+      }
+    };
+
+    const checkAuthState = async () => {
+      onAuthStateChanged(auth, user => {
+        if (user) {
+          authForm.style.display = 'none';
+          secretContent.style.display = 'block';
+        } else {
+          authForm.style.display = 'block';
+          secretContent.style.display = 'none';
+        }
+      });
+    };
+
+    const userSignUt = async () => {
+      await signOut(auth);
+      alert("Du har logget ut");
+    };
+
+    checkAuthState();
+
+    signUpButton.addEventListener('click', userSignUp);
+    signInButton.addEventListener('click', userSignIn);
+    signUtButton.addEventListener('click', userSignUt);
+
+    window.calculate = calculate;
+    window.addTodo = addTodo;
+    window.convertCurrency = convertCurrency;
+    window.getWeather = getWeather;
+  </script>
+
+  <script>
+    function calculate() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operator = document.getElementById('operator').value;
+      let result;
+      switch(operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/': result = num1 / num2; break;
+      }
+      document.getElementById('result').textContent = `Resultat: ${result}`;
+    }
+
+    function addTodo() {
+      const todoInput = document.getElementById('todoInput');
+      const todoList = document.getElementById('todos');
+      if (todoInput.value !== '') {
+        const li = document.createElement('li');
+        li.textContent = todoInput.value;
+        todoList.appendChild(li);
+        todoInput.value = '';
+      }
+    }
+
+    function convertCurrency() {
+      const amount = document.getElementById('amount').value;
+      const from = document.getElementById('fromCurrency').value;
+      const to = document.getElementById('toCurrency').value;
+      const rates = { NOK: 1, USD: 0.11, EUR: 0.09 };
+      const result = amount * (rates[to] / rates[from]);
+      document.getElementById('conversionResult').textContent = `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+    }
+
+    function getWeather() {
+      const city = document.getElementById('cityInput').value;
+      const weathers = ['Solskinn', 'Regn', 'Overskyet', 'Snø'];
+      const randomWeather = weathers[Math.floor(Math.random() * weathers.length)];
+      const temperature = Math.floor(Math.random() * 30) - 5; 
+      document.getElementById('weatherResult').textContent = `Været i ${city}: ${randomWeather}, ${temperature}°C`;
+    }
+  </script>
+</body>
+</html>

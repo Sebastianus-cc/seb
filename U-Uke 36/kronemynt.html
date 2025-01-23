@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="imgKron"><!--1-->
+    <script>
+        var imgKron=document.getElementById("imgKron");
+        var tilfeldigTall=Math.random();
+        if(tilfeldigTall<0.5){
+            imgKron.src="1000kr.jpg";
+        }
+        else{
+            imgKron.src="mynt.jpg"
+        }
+    </script>
+</body>
+</html>

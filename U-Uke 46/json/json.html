@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="filmer">
+        <h1>Våre Filmer</h1>
+        <table><tbody id="tblFilmer"></tbody></table>
+    </div><br>
+
+    <div class="handlekurv">
+        <h1>Handlekurv</h1>
+        <table><tbody id="tblHandlekurv"></tbody></table>
+    </div>
+    <div id="txtPris"></div>
+    <script src="filmdata.js"></script>
+    <script>
+        var tblFilmer=document.getElementById("tblFilmer");
+        var tblHandlekurv=document.getElementById("tblHandlekurv");
+        var filmer=new Map();
+        var kjopteFilmer=new Map();
+        var txtPris=document.getElementById("txtPris");
+        for(var film of filmbutikken.filmer){
+            filmer.set(film.id,film);}
+            for (var film of filmer.values()){
+                tblFilmer.innerHTML+=`
+                <tr><td><img src="${film.poster}"></td>
+                    <td>${film.tittel}</td>
+                    <td><button onclick="kjop('${film.id}')">Kjop</button></td></tr>`
+            }
+            function visHandlekurv(){
+                tblHandlekurv.innerHTML="";
+                for(var film of kjopteFilmer.values()){
+                    tblHandlekurv.innerHTML+=
+                    `<tr><td><img src="${film.poster}"</td>
+                        <td>${film.tittel}<b>kr${film.pris}</b></td>
+                        <td><button onclick="slett('${film.id}')">x</button></td></tr>`;
+                }
+                beregnPris();
+            }
+            function slett(film){
+                kjopteFilmer.delete(film);
+                visHandlekurv();
+            }
+            function kjop(film){
+                console.log(film);
+                var kjoptFilm=filmer.get(film);
+                console.log(kjoptFilm);
+                kjopteFilmer.set(film,kjoptFilm);
+                visHandlekurv();
+            }
+            function beregnPris(){
+                var pris=0;
+                for(var film of kjopteFilmer.values()){
+                    pris+=film.pris;
+                    txtPris.innerHTML=`Sum:kr${pris}`;
+                }
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article id="meny">
+        <h1>Kokkens anbefalinger</h1></article>
+        <script>
+            var meny=document.getElementById("meny");
+            function lagMeny(forrett,hovedrett,dessert){
+                meny.innerHTML+="<h2>Menyforslag</h2>";
+                meny.innerHTML+="<p>Forrett"+forrett+"</p>";
+                meny.innerHTML+="<p>Hovedrett"+hovedrett+"</p>";
+                meny.innerHTML+="<p>Dessert"+dessert+"</p>";
+            }
+            lagMeny("Melon med laks","Panert Rekker","Is");
+            lagMeny("Karnbonader","Krabbe","Pannekaker med flotte");
+            lagMeny("Ris med laks","Biff","Mango Is");
+
+        </script>
+</body>
+</html>

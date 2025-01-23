@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #infoBox {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="infoBox">
+        <h1>Mobilmerke Informasjon</h1>
+        <p>Klikk på knappen for å lære mer om et mobilmerke.</p>
+        <button onclick="getMobileInfo()">Få Informasjon</button>
+    </div>
+
+    <script>
+        function getMobileInfo() {
+            let mobil= prompt("Skriv inn et mobilmeker (Samsung, Microsoft, Sony eller Apple) for å få mer informasjon:");
+
+            switch (mobil.toLowerCase()) {
+                case "samsung": alert("Samsung er em sørkoreansk elektronikk firma som er kjent for sine innovative smarttelefoner, inkludert Galaxy-serien. De tilbyr et bredt utvalg av modeller for prisklasser og er kjent for since Amoled-skjermer.");
+                break;
+                case "microsoft": alert("Microsoft, selv om de ikke lengre produserer egne smarttelefoner, var tidligere kjent for sine Lumia-enheter. De fokuserer nå på mobilapplikasjoner og tjenester som Office-apper og OndeDrive for ulike plattformer.");
+                break;
+                case "sony": alert("Sony, et japansk selskap, produserer Xperia-serien av smarttelefoner. De er kjent for høykvalitets kameraer, vanntette design og integrasjon med andre Sony-produkter som PlayStation.");
+                break;
+                case "apple": alert("Apple, et amerikansk teknologiselskap produserer Iphone-serien. De er kjent for sin brukervennlig IOS-programvare, høykvalitets maskivare og tett integrasjon med andre Apple-tjenester som ICloud og App Store.");
+                break;
+                default: alert("Beklager, vi har ikke informasjon om det mobilmerket du skrev inn. Prøb igjen med enten Samsun, Microsoft, Sony eller Apple.");
+
+            }
+        }
+    </script>
+</body>
+</html>

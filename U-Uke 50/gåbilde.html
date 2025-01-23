@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0; 
+            background-color: #f0f0f0; 
+        }
+        #ninjakatt {
+            width: 200px;
+            height: 200px;
+            background-image: url(emu-otori-emu-otori-celebrate.gif);
+        }
+    </style>
+</head>
+<body>
+    <div id="ninjakatt"></div>
+    <script>
+        var animasjonKatt = [
+            { backgroundPosition: "0 0" },
+            { backgroundPosition: "-1800px 0" }
+        ];
+        var innstillingerKatt = {
+            duration: 450,
+            iterations: Infinity,
+            easing: "steps(10)"
+        };
+        var ninjakatt = document.getElementById("ninjakatt");
+        var player = ninjakatt.animate(animasjonKatt, innstillingerKatt);
+    </script>
+</body>
+</html>

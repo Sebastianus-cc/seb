@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .runding{
+            width: 30px;
+            height: 30px;
+            background-color: plum;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+<body>
+    <input type="color" value="#DDA0DD" id="inpFarge">
+    <script>
+        var inpFarge=document.getElementById("inpFarge");
+        inpFarge.onclick=function(evt){
+            evt.stopPropagation();
+        };
+        function forsvinn(evt){
+            evt.stopPropagation();
+            var runding=evt.target;
+            var animasjon=runding.animate([{opacity:1},{opacity:0}],500);
+            animasjon.onfinish=function(){
+                document.body.removeChild(runding);
+            }
+        }
+        window.onclick=function(evt){
+            var runding=document.createElement("div");
+            runding.className="runding";
+            runding.style.left=evt.clinetX-15+"px";
+            runding.style.top=evt.clientY-15+"px";
+            runding.style.background=inpFarge.value;
+            document.body.appendChild(runding);
+            runding.animate([{opacity:0},{opacity:1},500]);
+            runding.onclick=forsvinn;
+        }
+    </script>
+</body>
+</html>

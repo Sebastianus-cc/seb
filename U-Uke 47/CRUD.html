@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import{ getFirestore, addDoc, collection, setDoc, doc, getDoc}
+    from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
+ 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyAF3koWjtdaXbTg437KfNq0531lzTaoyno",
+    authDomain: "crud-f256d.firebaseapp.com",
+    projectId: "crud-f256d",
+    storageBucket: "crud-f256d.firebasestorage.app",
+    messagingSenderId: "734236349790",
+    appId: "1:734236349790:web:0468457665528b42926bcf"
+  };
+ 
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+     //henter ut referanse til firebase-databasen
+    const db = getFirestore();
+ 
+//Legger inn fire elever i databasen
+await setDoc(
+  doc(db, "elever", "thore"), {
+    fornavn: "Rebecca",
+    etternavn: "Thomasen",
+    telefon: "12345678"
+});
+await setDoc(
+  doc(db, "elever", "nilja"), {
+    fornavn: "Jakob",
+    etternavn: "Nilsen",
+    epost: "jakob@nilsen.net"
+});
+await setDoc(
+  doc(db, "elever", "moisa"), {
+    fornavn: "Isa",
+    etternavn: "Mo",
+    epost: "isamo@mo.no",
+    telefon: "23456789"
+});
+await setDoc(
+  doc(db, "elever", "marga"), {
+    fornavn: "Gabrielle",
+    etternavn: "Martin",
+    telefon: "45678901"
+});
+ 
+// import { getDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+ 
+const docSnap = await getDoc(
+  doc(db, "elever", "nilja")
+);
+console.log(
+  "Document data:",
+  docSnap.data()
+);
+  </script>
+</body>
+</html>

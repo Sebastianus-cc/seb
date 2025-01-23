@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var svar=prompt("Hvem skrev et dukkehjem?");
+        switch(svar){
+            case "Henrik Ibsen":
+            document.write("Riktig! Ett poeng til deg");
+            break;
+
+            case "Ibsen":
+            document.write("Riktig! Du svarte bare med etternavnet, ett halvt poeng til deg");
+            break;
+
+            case "Henrik":
+                document.write("Riktig! Du svarte bare med fornavnet, ett halvt poeng til deg");
+                break;
+                default:
+                    document.write("Beklager, feil svar");
+        }
+    </script>
+</body>
+</html>

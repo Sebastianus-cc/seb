@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: lightblue;
+            font-family: serif;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form id="frmFlyreise">
+        <label for="velgFlyplassUtreise">Fly fra</label>
+        <select id="velgFlyplassUtreise" required>
+            <option value="">velg Flyplass</option>
+            <option value="OSL">Oslo</option>
+            <option value="BGO">Bergen</option>
+            <option value="TRD">Trondheim</option>
+            <option value="TRO">Tromsø</option>
+        </select> 
+
+        <p><label for="inpUtdato">velg dato for utreise</label>
+        <input type="date" id="inpUtdato" required></p>
+        <p><label for="inpReturdato">Velg dato for retur</label>
+        <input type="date" id="inpReturdato" required></p>
+
+        <input type="radio" name="rbgType" value="2" id="rbTR" required data-tekst="Tur/Retur">
+        <label for="rbTR">Tur/retur</label>
+        <input type="radio" name="rbgType" value="1" id="rbEnVei" required data-tekst="En Vei">
+        <label for="rbEnVei">En vei</label>
+        <input type="number" id="inpAntVoksne" min="1" max="10" required>
+        <input type="number" id="inpAntBarn" min="0" value="0" max="10" required>
+        <label for="cbHotell">Tilbud på leiebil</label>
+        <input type="checkbox" id="cbLeiebil">
+        <label for="cbHotell">Tilbud på hotell</label>
+        <input type="checkbox" id="cbHotell">
+        <button type="submit">Søk og bestill</button>
+    </form>
+   
+    <div id="info"></div>
+   
+   <script>
+        var info=document.getElementById("info");
+        var frmFlyreise=document.getElementById("frmFlyreise");
+        var velgFlyplassUtreise=document.getElementById("velgFlyplassUtreise");
+        frmFlyreise.onsubmit=function(evt){
+            evt.preventDefault();
+            info.innerHTML="Utreise fra: "+velgFlyplassUtreise.value+"<br>";
+            info.innerHTML+="Utreise: "+inpUtdato.value+"<br>";
+            info.innerHTML+="Retur: "+inpReturdato.value+"<br>";
+            var valgtType=document.querySelector("input[name=rbgType]:checked");
+            info.innerHTML+="Reisetype: "+valgtType.value+"-";
+            info.innerHTML+=valgtType.getAttribute("data-tekst");
+            info.innerHTML+="Antall voksene: "+inpAntVoksne.value;
+            info.innerHTML+="Antall barn: "+inpAntBarn.value;
+            if(cbLeiebil.checked){
+                info.innerHTML+="Kunden ønsker tilbud på leiebil";
+            }
+                if(cbHotell.checked){
+                    info.innerHTML+="Kunden ønsker tilbud på hotell"
+                }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var temps = [3, 4, 5, 6, 5, 5, 6, 4, 4, 5, 2]
+        var i=0
+        var x=0
+        temps.sort()
+        for (temp of temps) {
+            x+temp;
+            console.log(temp);
+            if (temp < 3) {
+                i++
+            }
+        }
+        console.log(i+" Dager hadde lavere temperatur enn 3")
+        console.log(temps)
+        console.log((x/temps.length).toFixed(2)+" Er gjennomsnitten")
+    </script>
+</body>
+</html>

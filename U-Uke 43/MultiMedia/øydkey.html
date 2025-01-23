@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="keyboard"></div>
+    <script src="qwerty-hancock.js"></script>
+    <script>
+        var keyboard=new QwertyHancock({
+            id:'keyboard' ,
+            width: 600,
+            height:150,
+            octaves:2,
+            startNote: 'A3',
+            whiteNotesColour: 'white',
+            blackNotesColour: 'black',
+            hoverColour: '#f3e939'
+        });
+        var lyder=new Map();
+        var ac = new (window.AudioContext || window.webkitAudioContext)();
+        var ac=new AudioContext();
+        keyboard.keyDown=function(note,frequency){
+            var osc=ac.createOscillator();
+            osc.frequency.value=frequency;
+            osc.connect(ac.destination);
+            osc.start(ac.currentTime);
+            lyder.set(note,osc);};
+            keyboard.keyUp=function(note,frequency){
+                lyder.get(note).stop(ac.currentTime);
+            };
+    </script>
+</body>
+</html>

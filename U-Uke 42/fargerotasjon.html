@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: olive;
+        }
+        #anime{
+            width: 300px;
+            margin: 150px;
+            transition: 10s;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="color" name="" id="fargevelger">
+        <input type="range" name="" id="rotasjonvelger" min="0" max="360" value="0">
+    </div>
+    <img id="anime" src="wagro.jpg" alt="Anime">
+    <script>
+        var ugle=document.getElementById("ugle");
+        var rotasjonvelger=document.getElementById("rotasjonvelger");
+        var fargevelger=document.getElementById("fargevelger");
+        fargevelger.onchange=function(){
+            document.body.style.background=fargevelger.value;
+        }
+        rotasjonvelger.onchange=function(){
+            anime.style.transform="rotate("+rotasjonvelger.value+"deg)";
+        }
+    </script>
+</body>
+</html>

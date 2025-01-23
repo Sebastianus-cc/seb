@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Motorsykkel{
+            
+            constructor(motorsykkelmerke,modell,farge,toppfart,fart) {
+                this.motorsykkelmerke = motorsykkelmerke;
+                this.modell = modell;
+                this.farge = farge;
+                this.toppfart = toppfart;
+                this.fart = fart;
+            }
+            presenter() {
+            return `Denne sykkelen er en ${this.farge} ${this.motorsykkelmerke} ${this.modell}, med en toppfart på ${this.toppfart} km/h.
+            
+            Akkurat nå har den farten på ${this.fart} km/h.`
+        }
+            giGass() {
+                if (this.fart + 2 <= this.toppfart) {
+                    this.fart = this.fart + 2;
+                }
+            }
+        }
+        
+    
+        const suzuki = new Motorsykkel("Suzuki","GSXR1000","blå",299,0);
+        console.log(suzuki)
+
+        const yamaha = new Motorsykkel("Yamaha","R1","blå",299,0);
+        console.log(yamaha)
+
+        const honda = new Motorsykkel("Honda","CBR1000RR","rød",299,0);
+        console.log(honda)
+
+        let motorsykkelInfo = suzuki.presenter();
+        console.log(motorsykkelInfo)
+
+        const motorsykkel = [];
+        motorsykkel.push( new Motorsykkel("Suzuki","GSXR1000","blå",299,0));
+        motorsykkel.push( new Motorsykkel("Yamaha","R1","blå",299,0));
+        motorsykkel.push( new Motorsykkel("Honda","CBR1000RR","rød",299,0));
+        console.log(motorsykkel)
+
+        for (sykkel of motorsykkel) {
+  console.log(sykkel);
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <script>
+        let canvas=document.getElementById("canvas");
+        var ctx=canvas.getContext("2d");
+
+        var xPos=Number(prompt("skriv inn x-koordinat der strekningen starter"));
+        var yPos=Number(prompt("skriv inn y-koordinat der strekningen starter"));
+        var bredde=Number(prompt("skriv inn krysseets bredde"));
+        var hoyde=Number(prompt("skriv inn krysseets høyde"));
+        ctx.strokeStyle="orange";
+        ctx.lineWidth=10;
+        ctx.moveTo(xPos,yPos);
+        ctx.lineTo(xPos+bredde,yPos+hoyde);
+        ctx.moveTo(xPos+bredde,yPos);
+        ctx.lineTo(xPos,yPos+hoyde);
+        ctx.stroke();
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function visTid(antallDager){
+            var år=Math.floor(antallDager/365);
+            var månder=Math.floor(antallDager%365/30);
+            var dager=Math.floor(antallDager%365%30);
+
+            document.write(antallDager+" dager kan skirves som ");
+
+            document.write(+år+" år "+månder+" månder "+dager+" dager<br> ");
+        }
+        visTid(367);
+        visTid(490);
+        visTid(800);
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial- sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Energikalkulator</h1>
+    <form id="energyForm">
+        <label for="fat">Fett (gram):</label>
+        <input type="number" id="fat" required><br>
+
+        <label for="protein">Protein (gram):</label>
+        <input type="number" id="protein" required><br>
+
+        <label for="carbs">Karbohydrater (gram):</label>
+        <input type="number" id="carbs" required><br>
+
+        <button type="submit">Beregn energi</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function energyFromFat(gramsOfFat) {
+            return gramsOfFat * 9;
+        }
+
+        function energyFromProtein(gramsOfProtein) {
+            return gramsOfProtein * 4;
+        }
+
+        function energyFromCarbohydrates(gramsOfCarbs) {
+            return gramsOfCarbs * 4;
+        }
+
+        function totalEnergy(gramsOfFat, gramsOfProtein, gramsOfCarbs) {
+            return energyFromFat(gramsOfFat) +
+            energyFromProtein(gramsOfProtein) +
+            energyFromCarbohydrates(gramsOfCarbs);
+        }
+
+        function kcalToJoules(kilocalories) {
+            return kilocalories * 4184;
+        }
+
+        document.getElementById('energyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fat = parseFloat(document.getElementById('fat').value);
+            const protein = parseFloat(document.getElementById('protein').value);
+
+        const carbs= parseFloat(document.getElementById('carbs').value);
+
+        const totalKcal = totalEnergy(fat, protein, carbs);
+        const totalJoules = kcalToJoules(totalKcal);
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `
+        <p>Total energi: ${totalKcal.toFixed(2)} kilokalorier</p>
+        <p>Total energi: ${totalJoules.toFixed(2)} joule</p>
+        `;
+        });
+    </script>
+</body>
+</html>

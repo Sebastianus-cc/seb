@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="skjema">
+        <input type="text" id="inpAvsender" required placeholder="Hvem er du ?">
+        <input type="text" id="inpMening" required placeholder="Hva sier du?">
+        <button type="submit" class="button">OK</button>
+    </form>
+    <article id="txtMeldinger"></article>
+    <h1>Chat</h1>
+    <script type="module">
+        // Import necessary Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, push, onChildAdded } 
+        from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCY2eKVvE_JnEMxYdnQxBq79mAHXhYOaSk",
+  authDomain: "fir-acc8e.firebaseapp.com",
+  databaseURL: "https://fir-acc8e-default-rtdb.firebaseio.com",
+  projectId: "fir-acc8e",
+  storageBucket: "fir-acc8e.firebasestorage.app",
+  messagingSenderId: "107565766721",
+  appId: "1:107565766721:web:3bb9bce713dd3684e40ec0"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const meldinger = ref(database, "meldinger");
+    
+    // Get DOM elements
+    const skjema = document.getElementById("skjema");
+    const inpAvsender = document.getElementById("inpAvsender");
+    const inpMening = document.getElementById("inpMening");
+    const txtMeldinger = document.getElementById("txtMeldinger");
+
+    // Display each new message
+    function visMelding(snapshot) {
+        const melding = snapshot.val();
+        const meldingTekst = `<p><b>${melding.avsender}:</b> <i>${melding.tekst}</i></p>`;
+        txtMeldinger.innerHTML += meldingTekst;
+    }
+    
+    // Register a new message
+    function regNyMelding(evt) {
+        evt.preventDefault();
+        const nyMelding = {
+        avsender: inpAvsender.value,
+        tekst: inpMening.value
+      };
+      push(meldinger, nyMelding);
+      inpMening.value = "";
+    }
+
+    // Listen for new messages and display them
+    onChildAdded(meldinger, visMelding);
+
+    // Handle from submission
+    skjema.onsubmit = regNyMelding;
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="minCanvas" width="400" height="100"></canvas>
+    <script>
+        var minCanvas=document.getElementById("minCanvas");
+        var ctx=minCanvas.getContext("2d");
+        var firkant={
+            "bredde":40,
+            "hoyde":20,
+            "farge":"DarkGreen",
+            "xpos":180,
+            "ypos":40,
+            "xfart":3,
+            "xrettning":1
+        };
+        function tegnFirkant(){
+            ctx.fillStyle="DarkOrange";
+            ctx.fillRect(0,0,400,100);
+            ctx.fillStyle=firkant.farge;
+            ctx.fillRect(firkant.xpos,firkant.ypos,firkant.bredde,firkant.hoyde);
+            if(firkant.xpos<=0){
+                firkant.xrettning=1;
+            }
+            if(firkant.xpos+firkant.bredde>=minCanvas.width){
+                firkant.xrettning=-1;
+            }
+            firkant.xpos=firkant.xpos+(firkant.xrettning*firkant.xfart);
+            //StegnFirkant();
+            requestAnimationFrame(tegnFirkant);
+
+        }
+        tegnFirkant();
+    </script>
+</body>
+</html>

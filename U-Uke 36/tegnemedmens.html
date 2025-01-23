@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="minCanvas" width="300" height="300"></canvas>
+    <script>
+        var canvas=document.getElementById("minCanvas");
+        var ctx=canvas.getContext("2d");
+        var side=150;// bredde og høyde
+        var xPosisjon=0;//start posisjon x
+        var yPosisjon=0;//start posisjon y
+    while(side>0){
+        ctx.rect(xPosisjon, yPosisjon, side, side);
+        ctx.strokeStyle="red";
+        ctx.stroke();
+
+        xPosisjon=xPosisjon+10;
+        yPosisjon=yPosisjon+10;
+        side=side-20;
+    }
+</script>
+</body>
+</html>
